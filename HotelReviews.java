@@ -89,33 +89,44 @@ public class HotelReviews
     }
 
     /**
-     * A method to calculate the average rankings for each hotel and store in an array
+     * A method to calculate the average rankings for each hotel and store in an array field called avgRanks
      *
      */
     private void calculateAvgRankings() {
         int numHotels = getHotelCount();
         double avg;
+        
         for(int i = 0; i < numHotels; ++i) {
             avg = 0;
+            
             for(int j = 0; j < reviews.length; ++j) {
                 avg += reviews[j][i];
             }
+            
             avg /= reviews.length;
             avgRanks[i] = avg;
         }
+        
     }
 
     /**
      * A method to print the reviews in a nice table
+     * 
+     * Have to use a fencepost algorithm here to avoid extra
+     * tab at end of output
      */
     public void displayReviews() {
         int numHotels = getHotelCount();
+        
         System.out.println("Reviews");
+        
         for(int i = 0; i < reviews.length; ++i) {
             System.out.print(reviews[i][0]);
+        
             for(int j = 1; j < numHotels; ++j) {
                 System.out.print("\t" + reviews[i][j]);
             }
+            
             System.out.println();
         }
 
@@ -124,10 +135,14 @@ public class HotelReviews
 
     /** 
      * A method to print the average rankings in a nice table
+     * 
+     * Have to use a fencepost algorithm here to avoid extra
+     * tab at end of output
      */
     public void displayAvgRanks() {
         System.out.println("Average Rankings");
         System.out.print(String.format("%.2f",avgRanks[0]));
+        
         for(int i = 1; i < avgRanks.length; ++i) {
             System.out.print("\t" + String.format("%.2f", avgRanks[i]));
         }
@@ -140,7 +155,8 @@ public class HotelReviews
      * A method to print the names of the hotels in a list
      */
     public void displayHotels() {
-        System.out.println("Hotels");        
+        System.out.println("Hotels");
+        
         for(int i = 0; i < hotels.length; ++i) {
             System.out.println(hotels[i]);
         }
@@ -205,17 +221,11 @@ public class HotelReviews
             if(hotelReviews.getRankHotel(2,6) != 6) System.out.println("Before sorting, getRankHotel of last hotel and last review should be 6 but is " + hotelReviews.getRankHotel(2,6));
             if(!hotelReviews.getHotel(0).equals("Fancy Pants Hotel - Free Bug Spray Included")) System.out.println("Before sorting, getHotel method should return 'Fancy Pants Hotel - Free Bug Spray Included' but instead returned " + hotelReviews.getHotel(0));
             if(hotelReviews.getAvgRank(0) != 8.00) System.out.println("Before sorting, getAvgRank of hotel 0 should be 8.00 but is " + hotelReviews.getAvgRank(0));
-            hotelReviews.displayReviews();
-            hotelReviews.displayAvgRanks();
-            hotelReviews.displayHotels();
-            
+          
             hotelReviews.sortByRanking();
             if(hotelReviews.getRankHotel(0,0) != 8) System.out.println("After sorting, getRankHotel of first hotel and first review should be 8 but is " + hotelReviews.getRankHotel(0,0));
             if(!hotelReviews.getHotel(0).equals("So Easy a Caveman Can Do It Hotel")) System.out.println("After sorting, getHotel method should return 'So Easy a Caveman Can Do It Hotel' but instead returned " + hotelReviews.getHotel(0));
-            if(hotelReviews.getAvgRank(0) != 28.0/3.0) System.out.println("After sorting, getAvgRank of hotel 0 should be 9.33 but is " + hotelReviews.getAvgRank(0));
-            hotelReviews.displayReviews();
-            hotelReviews.displayAvgRanks();
-            hotelReviews.displayHotels(); 
+            if(hotelReviews.getAvgRank(0) != 28.0/3.0) System.out.println("After sorting, getAvgRank of hotel 0 should be 9.33 but is " + hotelReviews.getAvgRank(0));       
     }
 
 }
